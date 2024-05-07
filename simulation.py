@@ -1,4 +1,5 @@
 from grid import Grid
+import rules
 
 class Simulation:
 	def __init__(self, width, height, cell_size):
@@ -7,6 +8,8 @@ class Simulation:
 		self.rows = height // cell_size
 		self.columns = width // cell_size
 		self.run = False
+		self.rule_list = ['conways', 'day and night']
+		self.rule_index = 0
 
 	def draw(self, window):
 		self.grid.draw(window)
@@ -30,16 +33,12 @@ class Simulation:
 					live_neighbors = self.count_live_neighbors(self.grid, row, column)
 					cell_value = self.grid.cells[row][column]
 
-					if cell_value == 1:
-						if live_neighbors > 3 or live_neighbors < 2:
-							self.temp_grid.cells[row][column] = 0
-						else:
-							self.temp_grid.cells[row][column] = 1
-					else:
-						if live_neighbors == 3:
-							self.temp_grid.cells[row][column] = 1
-						else:
-							self.temp_grid.cells[row][column] = 0
+					rule = rule_list[rule_index]
+
+					if self.rule == 'conways':
+						self.temp_grid.cells[row][column] = rules.conways(cell_value, live_neighbors)
+					elif self.rule == 'day and night':
+						self.temp_grid.cells[row][column] = rules.day_and_night(cell_value, live_neighbors)
 
 			for row in range(self.rows):
 				for column in range(self.columns):
@@ -65,3 +64,17 @@ class Simulation:
 	def toggle_cell(self, row, column):
 		if self.is_running() == False:
 			self.grid.toggle_cell(row, column)
+
+	def rule_down(self):
+		if self.is_running() == False:
+			if self.rule_index < len(self.rule_list) - 1:
+				self.rule_index += 1
+			else:
+				self.rule_index = 0
+
+	def rule_up(self):
+		if self.is_running() == False:
+			if self.rule_index > 0:
+				self.rule_index -= 1
+			else:
+				self.rule_index = len(self.rule_list) - 1
