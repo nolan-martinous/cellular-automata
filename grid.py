@@ -1,7 +1,13 @@
 import pygame, random
 
-ALIVE = (31, 81, 255)
-DEAD = (55, 55, 55)
+NAVY = (31, 81, 255)
+GREY = (55, 55, 55)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+YELLOW = (255, 255, 0)
+WHITE = (255, 255, 255)
+MAGENTA = (255, 0, 255)
+CYAN = (0, 255, 255)
 
 class Grid:
 	def __init__(self, width, height, cell_size):
@@ -13,7 +19,28 @@ class Grid:
 	def draw(self, window):
 		for row in range(self.rows):
 			for column in range(self.columns):
-				color = ALIVE if self.cells[row][column] else DEAD
+				if self.cells[row][column] == 0:
+					color = GREY
+				elif self.cells[row][column] == 1:
+					color = NAVY
+				elif self.cells[row][column] == 2:
+					color = RED
+				elif self.cells[row][column] == 3:
+					color = GREEN
+				elif self.cells[row][column] == 4:
+					color = YELLOW
+				elif self.cells[row][column] == 5:
+					color = MAGENTA
+				elif self.cells[row][column] == 6:
+					color = WHITE
+				elif self.cells[row][column] == 7:
+					color = CYAN
+				elif self.cells[row][column] == 'ANT':
+					color = RED
+				elif self.cells[row][column] == 'SELECT':
+					color = GREEN
+				elif self.cells[row][column] == 'WHITE':
+					color = WHITE
 				pygame.draw.rect(window, color, (column * self.cell_size, row * self.cell_size, self.cell_size -1, self.cell_size - 1))
 
 	def fill_random(self):

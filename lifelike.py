@@ -1,7 +1,7 @@
 from grid import Grid
 import rules
 
-class Simulation:
+class Life:
 	def __init__(self, width, height, cell_size):
 		self.grid = Grid(width, height, cell_size)
 		self.temp_grid = Grid(width, height, cell_size)

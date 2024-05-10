@@ -1,14 +1,14 @@
 from grid import Grid
 import rules
 
-class Simulation:
+class Life:
 	def __init__(self, width, height, cell_size):
 		self.grid = Grid(width, height, cell_size)
 		self.temp_grid = Grid(width, height, cell_size)
 		self.rows = height // cell_size
 		self.columns = width // cell_size
 		self.run = False
-		self.rule_list = ['conways', 'day and night']
+		self.rule_list = ["conway's", 'day and night', 'replicator']
 		self.rule_index = 0
 
 	def draw(self, window):
@@ -35,10 +35,12 @@ class Simulation:
 
 					self.rule = self.rule_list[self.rule_index]
 
-					if self.rule == 'conways':
+					if self.rule == "conway's":
 						self.temp_grid.cells[row][column] = rules.conways(cell_value, live_neighbors)
 					elif self.rule == 'day and night':
 						self.temp_grid.cells[row][column] = rules.day_and_night(cell_value, live_neighbors)
+					elif self.rule == 'replicator':
+						self.temp_grid.cells[row][column] = rules.replicator(cell_value, live_neighbors)
 
 			for row in range(self.rows):
 				for column in range(self.columns):

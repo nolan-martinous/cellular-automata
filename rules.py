@@ -12,6 +12,7 @@ def conways(cell_value, live_neighbors):
 		else:
 			return 0
 
+# rules for day & night
 def day_and_night(cell_value,live_neighbors):
 	if cell_value == 1:
 		if live_neighbors < 3 or live_neighbors == 5:
@@ -23,3 +24,17 @@ def day_and_night(cell_value,live_neighbors):
 			return 1
 		else:
 			return 0
+
+# rules for replicator
+def replicator(cell_value,live_neighbors):
+	if cell_value == 1:
+		if live_neighbors % 2 == 1:
+			return 0 
+		else:
+			return 1
+	else:
+		if live_neighbors % 2 == 1:
+			return 1
+		else:
+			return 0
+
