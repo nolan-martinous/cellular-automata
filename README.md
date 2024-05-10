@@ -1,6 +1,4 @@
-# cellular automata
-
-## Current Automata
+# Cellular Automata
 
 #### Conway's Game of Life
 
